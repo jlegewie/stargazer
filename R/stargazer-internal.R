@@ -225,6 +225,9 @@ function(libname, pkgname) {
       if (model.name %in% c("felm")) {
         return(.summary.object$r2adj)
       }
+      if (model.name %in% c("fixest")) {
+        return(0)
+      }
   		if (!is.null(suppressMessages(.summary.object$adj.r.squared))) {
   			return(as.vector(suppressMessages(.summary.object$adj.r.squared)))
   		}
@@ -908,6 +911,9 @@ function(libname, pkgname) {
   	else if (model.name %in% c("felm")) {
   	  return(row.names(object.name$coefficients))
     }
+    else if (model.name %in% c("fixest")) {
+      return(names(object.name$coefficients))
+    }
   	else if (model.name %in% c("maBina")) {
   	  return(as.vector(rownames(object.name$out)))
   	}
@@ -1235,6 +1241,9 @@ function(libname, pkgname) {
     if (model.name %in% c("censReg")) {
       return(.summary.object$estimate[,4])
     }
+    if (model.name %in% c("fixest")) {
+      return(.summary.object$coeftable[,4])
+    }
     if (model.name %in% c("mnlogit")) {
       return(.summary.object$CoefTable[,4])
     }
@@ -1560,6 +1569,9 @@ function(libname, pkgname) {
     if (model.name %in% c("rq","felm")) {
       return(.summary.object$coefficients[,2])
     }
+    if (model.name %in% "fixest") {
+      return(.summary.object$coeftable[,2])
+    }
   	if (model.name %in% c("clm")) {
   	  if (.format.ordered.intercepts == FALSE) {
   	    return(.summary.object$coefficients[(length(object.name$alpha)+1):(length(object.name$coefficients)),2])
@@ -1795,6 +1807,9 @@ function(libname, pkgname) {
   	if (model.name %in% c("censReg")) {
   	  return(.summary.object$estimate[,3])
   	}
+    if (model.name %in% "fixest") {
+      return(.summary.object$coeftable[,3])
+    }
   	if (model.name %in% c("mnlogit")) {
   	  return(.summary.object$CoefTable[,3])
   	}
@@ -2288,6 +2303,9 @@ function(libname, pkgname) {
     
     if (class(object.name)[1]=="felm") {
       return("felm")
+    }
+    if (class(object.name)[1]=="fixest") {
+      return("fixest")
     }
     if (class(object.name)[1] %in% c("mclogit","mclogitRandeff")) {
       return("mclogit")
@@ -2787,6 +2805,9 @@ function(libname, pkgname) {
     }
     else if (model.name %in% c("felm")) {
       return(object.name$N)
+    }
+    else if (model.name %in% c("fixest")) {
+      return(object.name$nobs)
     }
     else if (model.name %in% c("mclogit")) {
       return(object.name$N)
@@ -3672,6 +3693,9 @@ function(libname, pkgname) {
   	  if (model.name %in% c("felm")) {
   	    return(.summary.object$r2)
   	  }
+      if (model.name %in% c("fixest")) {
+        return(0)
+      }
       if (model.name %in% c("mlogit")) {
         return(.summary.object$mfR2[1])
       }
@@ -3862,6 +3886,9 @@ function(libname, pkgname) {
 
   	if (!(model.name %in% c("arima","lme","nlme","fGARCH","Arima","maBina","coeftest","lmer","glmer","nlmer","gls","Gls"))) {
       if (model.name %in% c("felm")) {
+        SER.output <- as.vector(c(.summary.object$rse, .summary.object$rdf, NA))
+      }
+      if (model.name %in% c("fixest")) {
         SER.output <- as.vector(c(.summary.object$rse, .summary.object$rdf, NA))
       }
   		else if (!is.null(suppressMessages(.summary.object$sigma))) {
@@ -4792,6 +4819,9 @@ function(libname, pkgname) {
     }
     if (model.name %in% c("rq","felm")) {
       return(.summary.object$coefficients[,1])
+    }
+    if (model.name %in% "fixest") {
+      return(.summary.object$coeftable[,1])
     }
   	if (model.name %in% c("clm")) {
   	  if (.format.ordered.intercepts == FALSE) {
