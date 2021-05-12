@@ -1,0 +1,2 @@
+
+Opinionated version of the R stargazer package `stargazer` that can be found on [CRAN](https://cran.r-project.org/web/packages/stargazer/index.html). The differences are some changes to the default settings (e.g. default output type is "text" and not "latex") and support for additional models (currently only from the `fixest` package).
