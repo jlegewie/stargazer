@@ -226,7 +226,7 @@ function(libname, pkgname) {
         return(.summary.object$r2adj)
       }
       if (model.name %in% c("fixest")) {
-        return(0)
+        return(NA)
       }
   		if (!is.null(suppressMessages(.summary.object$adj.r.squared))) {
   			return(as.vector(suppressMessages(.summary.object$adj.r.squared)))
@@ -3694,7 +3694,7 @@ function(libname, pkgname) {
   	    return(.summary.object$r2)
   	  }
       if (model.name %in% c("fixest")) {
-        return(0)
+        return(NA)
       }
       if (model.name %in% c("mlogit")) {
         return(.summary.object$mfR2[1])
@@ -3889,7 +3889,7 @@ function(libname, pkgname) {
         SER.output <- as.vector(c(.summary.object$rse, .summary.object$rdf, NA))
       }
       if (model.name %in% c("fixest")) {
-        SER.output <- as.vector(c(.summary.object$rse, .summary.object$rdf, NA))
+        SER.output <- as.vector(c(NA, NA, NA))
       }
   		else if (!is.null(suppressMessages(.summary.object$sigma))) {
   			sigma.value <-suppressMessages(.summary.object$sigma)
